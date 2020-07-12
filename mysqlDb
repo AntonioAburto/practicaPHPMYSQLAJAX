@@ -1,1 +1,557 @@
 
+-- MySQL dump 10.13  Distrib 5.7.30, for Linux (i686)
+--
+-- Host: localhost    Database: inventory
+-- ------------------------------------------------------
+-- Server version	5.7.30-0ubuntu0.16.04.1
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `inputs`
+--
+
+DROP TABLE IF EXISTS `inputs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `inputs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `description` varchar(45) DEFAULT NULL,
+  `date` varchar(45) DEFAULT NULL,
+  `user` int(11) DEFAULT '0',
+  `id_transfer` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `inputs`
+--
+
+LOCK TABLES `inputs` WRITE;
+/*!40000 ALTER TABLE `inputs` DISABLE KEYS */;
+INSERT INTO `inputs` VALUES (20,'Entrda por traspaso:20','2020-07-07',1,20),(28,'Entrda por traspaso:28','2020-07-12',1,28),(29,'Entrda por traspaso:29','2020-07-12',1,29);
+/*!40000 ALTER TABLE `inputs` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `inventory`.
+`inputs_BEFORE_DELETE` BEFORE DELETE ON `inputs` FOR EACH ROW
+BEGIN
+	DELETE FROM inputs_detail 
+    where
+		input_id = old.id;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Table structure for table `inputs_detail`
+--
+
+DROP TABLE IF EXISTS `inputs_detail`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `inputs_detail` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `input_id` int(11) DEFAULT NULL,
+  `description` varchar(100) DEFAULT NULL,
+  `product_id` varchar(45) DEFAULT NULL,
+  `quantity` double DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `inputs_detail`
+--
+
+LOCK TABLES `inputs_detail` WRITE;
+/*!40000 ALTER TABLE `inputs_detail` DISABLE KEYS */;
+INSERT INTO `inputs_detail` VALUES (11,20,'Description','2',20),(12,20,'Description','3',10),(13,20,'Description','3',5),(34,28,'Description','1',4),(35,28,'Description','4',1),(36,28,'Description','6',20),(37,29,'Description','1',3),(38,29,'Description','2',4),(39,29,'Description','4',4),(40,29,'Description','5',4),(41,29,'Description','6',6);
+/*!40000 ALTER TABLE `inputs_detail` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `outputs`
+--
+
+DROP TABLE IF EXISTS `outputs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `outputs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `description` varchar(45) DEFAULT NULL,
+  `date` varchar(45) DEFAULT NULL,
+  `user` int(11) DEFAULT '0',
+  `id_transfer` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `outputs`
+--
+
+LOCK TABLES `outputs` WRITE;
+/*!40000 ALTER TABLE `outputs` DISABLE KEYS */;
+INSERT INTO `outputs` VALUES (20,'Salida por traspaso:20','2020-07-07',1,20),(28,'Salida por traspaso:28','2020-07-12',1,28),(29,'Salida por traspaso:29','2020-07-12',1,29);
+/*!40000 ALTER TABLE `outputs` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `inventory`.`outputs_BEFORE_DELETE` BEFORE DELETE ON `outputs` FOR EACH ROW
+BEGIN
+	DELETE FROM outputs_detail 
+    where
+		output_id = old.id;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Table structure for table `outputs_detail`
+--
+
+DROP TABLE IF EXISTS `outputs_detail`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `outputs_detail` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `output_id` int(11) DEFAULT NULL,
+  `description` varchar(100) DEFAULT NULL,
+  `product_id` varchar(45) DEFAULT NULL,
+  `quantity` double DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `outputs_detail`
+--
+
+LOCK TABLES `outputs_detail` WRITE;
+/*!40000 ALTER TABLE `outputs_detail` DISABLE KEYS */;
+INSERT INTO `outputs_detail` VALUES (11,20,'Description','2',20),(12,20,'Description','3',10),(13,20,'Description','3',5),(34,28,'Description','1',4),(35,28,'Description','4',1),(36,28,'Description','6',20),(37,29,'Description','1',3),(38,29,'Description','2',4),(39,29,'Description','4',4),(40,29,'Description','5',4),(41,29,'Description','6',6);
+/*!40000 ALTER TABLE `outputs_detail` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `product_warehouse`
+--
+
+DROP TABLE IF EXISTS `product_warehouse`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `product_warehouse` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_product` int(10) NOT NULL,
+  `id_warehouse` varchar(45) NOT NULL,
+  `existence` double DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_warehouse_idx` (`id_warehouse`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `product_warehouse`
+--
+
+LOCK TABLES `product_warehouse` WRITE;
+/*!40000 ALTER TABLE `product_warehouse` DISABLE KEYS */;
+/*!40000 ALTER TABLE `product_warehouse` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `products`
+--
+
+DROP TABLE IF EXISTS `products`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `products` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `product` varchar(45) DEFAULT NULL,
+  `price` double DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `products`
+--
+
+LOCK TABLES `products` WRITE;
+/*!40000 ALTER TABLE `products` DISABLE KEYS */;
+INSERT INTO `products` VALUES (1,'pc dell optiplex 755',5000),(2,'monitor dell optiplex 755',1000),(3,'monitor optiplex 777',1100),(4,'Refrigerador LG 12 pies',8000),(5,'Refrigerador Wirpol 11 pies	',9000),(6,'Televisor Sanyo Smart HD 40\"	',7000);
+/*!40000 ALTER TABLE `products` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `rule_field_desciption`
+--
+
+DROP TABLE IF EXISTS `rule_field_desciption`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `rule_field_desciption` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `table` varchar(45) DEFAULT NULL,
+  `description` varchar(60) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `rule_field_desciption`
+--
+
+LOCK TABLES `rule_field_desciption` WRITE;
+/*!40000 ALTER TABLE `rule_field_desciption` DISABLE KEYS */;
+INSERT INTO `rule_field_desciption` VALUES (1,'transfer','0 pending, 1 sent, 2 delivered');
+/*!40000 ALTER TABLE `rule_field_desciption` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `transfer`
+--
+
+DROP TABLE IF EXISTS `transfer`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `transfer` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `description` varchar(200) DEFAULT NULL,
+  `date` datetime DEFAULT NULL,
+  `warehose_origin` int(11) DEFAULT NULL,
+  `warehose_destination` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_warehouse_origin_idx` (`warehose_origin`),
+  KEY `fk_warehouse_destination_idx` (`warehose_destination`),
+  CONSTRAINT `fk_warehouse_destination` FOREIGN KEY (`warehose_destination`) REFERENCES `warehouse` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_warehouse_origin` FOREIGN KEY (`warehose_origin`) REFERENCES `warehouse` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `transfer`
+--
+
+LOCK TABLES `transfer` WRITE;
+/*!40000 ALTER TABLE `transfer` DISABLE KEYS */;
+INSERT INTO `transfer` VALUES (20,'Traspaso  Tijuana a culiacan','2020-07-07 00:00:00',4,3,1),(28,'Traspaso automatico','2020-07-12 00:00:00',1,2,0),(29,'Traspaso automatico','2020-07-12 00:00:00',1,3,0);
+/*!40000 ALTER TABLE `transfer` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `inventory`.
+`transfer_AFTER_INSERT` 
+AFTER INSERT ON `transfer` 
+FOR EACH ROW
+BEGIN
+	INSERT INTO `inventory`.`inputs`
+	(`description`,
+	`date`,
+	`user`,
+	`id_transfer`)
+	VALUES
+	(concat('Entrda por traspaso:',new.id), curdate(), 
+	1, new.id);
+    
+    INSERT INTO `inventory`.`outputs`
+	(`description`,
+	`date`,
+	`user`,
+	`id_transfer`)
+	VALUES
+	(concat('Salida por traspaso:',new.id), curdate(), 
+	1, new.id);
+    
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `inventory`.
+`transfer_BEFORE_DELETE` BEFORE DELETE ON `transfer` 
+FOR EACH ROW
+BEGIN
+	DELETE FROM `inventory`.`transfer_product_detail`
+	WHERE id_transfer = old.id;
+	
+    DELETE FROM `inventory`.`inputs`
+	WHERE id_transfer=old.id;
+    
+    DELETE FROM `inventory`.`outputs`
+	WHERE id_transfer=old.id;
+    
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Table structure for table `transfer_product_detail`
+--
+
+DROP TABLE IF EXISTS `transfer_product_detail`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `transfer_product_detail` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `id_transfer` int(11) NOT NULL,
+  `id_product` int(11) NOT NULL,
+  `quantity` double NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_tranfer_id_idx` (`id_transfer`),
+  KEY `fk_id_product_idx` (`id_product`),
+  KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `transfer_product_detail`
+--
+
+LOCK TABLES `transfer_product_detail` WRITE;
+/*!40000 ALTER TABLE `transfer_product_detail` DISABLE KEYS */;
+INSERT INTO `transfer_product_detail` VALUES (11,20,2,20),(12,20,1,10),(13,20,3,5),(34,28,1,4),(35,28,4,1),(36,28,6,20),(37,29,1,3),(38,29,2,4),(39,29,4,4),(40,29,5,4),(41,29,6,6);
+/*!40000 ALTER TABLE `transfer_product_detail` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `inventory`.`transfer_product_detail_AFTER_INSERT` AFTER INSERT ON `transfer_product_detail` FOR EACH ROW
+BEGIN
+	INSERT INTO `inventory`.`inputs_detail`
+	(`input_id`,
+	`description`,
+	`product_id`,
+	`quantity`)
+	VALUES
+	((select id from inputs where id_transfer = new.id_transfer),
+    'Description', new.id_product, new.quantity);
+    
+    INSERT INTO `inventory`.`outputs_detail`
+	(`output_id`,
+	`description`,
+	`product_id`,
+	`quantity`)
+	VALUES
+	((select id from outputs where id_transfer = new.id_transfer),
+    'Description', new.id_product, new.quantity);
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Table structure for table `user_permissions`
+--
+
+DROP TABLE IF EXISTS `user_permissions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_permissions` (
+  `id` int(11) NOT NULL,
+  `descritpion` varchar(45) DEFAULT NULL,
+  `section` varchar(45) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_permissions`
+--
+
+LOCK TABLES `user_permissions` WRITE;
+/*!40000 ALTER TABLE `user_permissions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_permissions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` varchar(45) DEFAULT NULL,
+  `password` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'antonio','antonio'),(2,'jose','jose'),(3,'administrador','admin'),(4,'admin_alm_los_mochis','admin'),(5,'admin_alm_culiacan','admin'),(6,'admin_alm_tijuana','admin');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Temporary table structure for view `vw_transfer`
+--
+
+DROP TABLE IF EXISTS `vw_transfer`;
+/*!50001 DROP VIEW IF EXISTS `vw_transfer`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `vw_transfer` AS SELECT 
+ 1 AS `id`,
+ 1 AS `description`,
+ 1 AS `date`,
+ 1 AS `warehouse_origin`,
+ 1 AS `warehouse_destination`,
+ 1 AS `status`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary table structure for view `vw_transfer_details`
+--
+
+DROP TABLE IF EXISTS `vw_transfer_details`;
+/*!50001 DROP VIEW IF EXISTS `vw_transfer_details`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `vw_transfer_details` AS SELECT 
+ 1 AS `no_producto`,
+ 1 AS `producto`,
+ 1 AS `precio`,
+ 1 AS `cantidad`,
+ 1 AS `no_transferencia`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Table structure for table `warehouse`
+--
+
+DROP TABLE IF EXISTS `warehouse`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `warehouse` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `warehouse` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `warehouse`
+--
+
+LOCK TABLES `warehouse` WRITE;
+/*!40000 ALTER TABLE `warehouse` DISABLE KEYS */;
+INSERT INTO `warehouse` VALUES (1,'Almacen principal'),(2,'Almacen los mochis'),(3,'Almacen culiacan'),(4,'Almacen tijuana');
+/*!40000 ALTER TABLE `warehouse` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Final view structure for view `vw_transfer`
+--
+
+/*!50001 DROP VIEW IF EXISTS `vw_transfer`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `vw_transfer` AS select `trans`.`id` AS `id`,`trans`.`description` AS `description`,`trans`.`date` AS `date`,`whO`.`warehouse` AS `warehouse_origin`,`whD`.`warehouse` AS `warehouse_destination`,`trans`.`status` AS `status` from ((`transfer` `trans` join `warehouse` `whO` on((`whO`.`id` = `trans`.`warehose_origin`))) join `warehouse` `whD` on((`whD`.`id` = `trans`.`warehose_destination`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `vw_transfer_details`
+--
+
+/*!50001 DROP VIEW IF EXISTS `vw_transfer_details`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `vw_transfer_details` AS select `prods`.`id` AS `no_producto`,`prods`.`product` AS `producto`,`prods`.`price` AS `precio`,`trDet`.`quantity` AS `cantidad`,`trDet`.`id_transfer` AS `no_transferencia` from (`products` `prods` join `transfer_product_detail` `trDet` on((`prods`.`id` = `trDet`.`id_product`))) order by `trDet`.`id_transfer` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2020-07-12 16:22:59
